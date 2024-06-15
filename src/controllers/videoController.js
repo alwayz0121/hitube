@@ -2,10 +2,6 @@
 // 어디에서 node.js를 부르고 서버를 기동하는가?
 // => package.json이 node.js를 시작함
 
-// const fakeUser = {
-//   username: "Nicolas",
-//   loggedIn: true,
-// };
 const videos = [
   {
     title: "First Video",
@@ -36,22 +32,23 @@ const videos = [
 export const trending = (req, res) => {
   return res.render("home", { pageTitle: "Home", videos });
 };
+
 export const watch = (req, res) => {
   const { id } = req.params;
-  // const id = req.params.id
   const video = videos[id - 1];
   return res.render("watch", { pageTitle: `Watching: ${video.title}`, video });
 };
+
 export const getEdit = (req, res) => {
   const { id } = req.params;
   const video = videos[id - 1];
   return res.render("edit", { pageTitle: `Editing: ${video.title}`, video });
 };
+
 export const postEdit = (req, res) => {
   const { id } = req.params;
   //form 을 통해 받는 모든 결과는 req.body에 담긴다. express.urlencoded 미들웨어를 설정해야 사용 가능
   const { title } = req.body;
-  // req.body를 통해 받은 이름을 title로 업데이트
   videos[id - 1].title = title;
   return res.redirect(`/videos/${id}`);
 };
